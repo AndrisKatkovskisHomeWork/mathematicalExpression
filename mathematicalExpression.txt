@@ -1,0 +1,49 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        mathematicalExpression();
+    }
+
+    public static void mathematicalExpression() {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Please enter the mathematical expression (digits like \"2.5\" and action like +-*/): ");
+
+        String inputExpression = input.next();   //f.ex. 5+6+1+1+1+55-68*15/6;   //
+        String[] result = inputExpression.split("(?<=[-+*/])|(?=[-+*/])");
+
+        System.out.println("Your mathematical expression is divided into the following elements: ");
+        for (int i = 0; i < result.length; i++) {
+            System.out.print("[" + result[i] + "] ");
+        }
+        System.out.println();
+        System.out.println("Entered expression: " + inputExpression + " calculation: ");
+
+        double numberFromExpression = 0;
+        double sum = Double.parseDouble(result[0]);
+
+        for (int i = 1; i < result.length - 1; i = i + 2) {
+
+            numberFromExpression = Integer.parseInt(result[i + 1]);
+            System.out.print(sum + "\t" + result[i] + "\t" + numberFromExpression + "\t = ");
+            if (result[i].equals("+")) {
+                sum = sum + numberFromExpression;
+            }
+            if (result[i].equals("-")) {
+                sum = sum - numberFromExpression;
+            }
+            if (result[i].equals("*")) {
+                sum = sum * numberFromExpression;
+            }
+            if (result[i].equals("/")) {
+                sum = sum / numberFromExpression;
+            }
+            
+            System.out.println("Total sum: " + sum);
+        }
+    }
+}
